@@ -35,7 +35,7 @@ function disMain() {
                 <div class="col-md-3 border-0">
                     <div class='all-item position-relative overflow-hidden rounded-3' onclick='disMainItem(${i})'>
                         <img src=${allCat[i].strMealThumb} class='w-100'>        
-                        <div class='item-data position-absolute px-2 end-0 w-100 d-flex align-items-center'>
+                        <div class='item-data position-absolute px-2 w-100'>
                             <h3>${allCat[i].strMeal}</h3>
                         </div>
                     </div>
@@ -116,9 +116,9 @@ async function disAllCat() {
     for (let i = 0; i < allCat.length; i++) {
         item+=`
                 <div class="col-md-3 border-0">
-                    <div class='all-item position-relative overflow-hidden rounded-3 cate' onclick='disAllCatFil()'>
-                        <img src=${allCat[i].strCategoryThumb} class='w-100'>        
-                        <div class='item-data position-absolute px-2 end-0 w-100 text-center'>
+                <div class='all-item position-relative overflow-hidden rounded-3 cate' onclick='disAllCatFil("${allCat[i].strCategory}")'>
+                <img src=${allCat[i].strCategoryThumb} class='w-100'>        
+                        <div class='item-data position-absolute px-2 w-100'>
                             <h3 class='mt-3'>${allCat[i].strCategory}</h3>
                             <p>${allCat[i].strCategoryDescription}</p>
                         </div>
@@ -129,25 +129,28 @@ async function disAllCat() {
             main.innerHTML = item;
 }
 
-async function disAllCatFil(cat) {
-    let food = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}}`);
+async function disAllCatFil(cate) {
+    let food = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cate}`);
     let cateFil = await food.json();
     let allCat = cateFil.meals;
     let item = ``;
-    for (let i = 0; i < allCat.length; i++) {
-        item+=`
-                <div class="col-md-3 border-0">
-                    <div class='all-item position-relative overflow-hidden rounded-3'>
-                        <img src=${allCat[i].strCategoryThumb} class='w-100'>        
-                        <div class='item-data position-absolute px-2 end-0 w-100 text-center'>
-                            <h3 class='mt-3'>${allCat[i].strCategory}</h3>
-                            <p>${allCat[i].strCategoryDescription}</p>
+    if (allCat) {
+        for (let i = 0; i < allCat.length; i++) {
+            item+=`
+                    <div class="col-md-3 border-0">
+                        <div class='all-item position-relative overflow-hidden rounded-3'>
+                            <img src=${allCat[i].strMealThumb} class='w-100'>        
+                            <div class='item-data position-absolute px-2 end-0 w-100 text-center'>
+                                <h3 class='mt-3'>${allCat[i].strMeal}</h3>
+                            </div>
                         </div>
                     </div>
-                </div>
-                `;
-            }
-            main.innerHTML = item;
+                    `;
+                }
+    } else {
+        item = `<div>No meals found for this category.</div>`;
+    }
+    main.innerHTML = item;
 }
 
 /* ========================= BY AREA ========================= */
