@@ -34,7 +34,7 @@ function disMain() {
             item+=`
                 <div class="col-md-3 border-0">
                     <div class='all-item position-relative overflow-hidden rounded-3' onclick='disMainItem(${i})'>
-                        <img src=${allCat[i].strMealThumb} class='w-100'>        
+                        <img src=${allCat[i].strMealThumb} class='w-100' loading="lazy">        
                         <div class='item-data position-absolute px-2 w-100'>
                             <h3>${allCat[i].strMeal}</h3>
                         </div>
@@ -64,7 +64,7 @@ function disMainItem(i) {
     let item = `
                 <div class="col-md-4 border-0">
                     <div>
-                        <img src=${selectedItem.strMealThumb} class='w-100 rounded-3'>
+                        <img src=${selectedItem.strMealThumb} class='w-100 rounded-3' loading="lazy">
                         <h2 class='text-light'>${selectedItem.strMeal}</h2>
                     </div>
                 </div>
@@ -115,9 +115,9 @@ async function disAllCat() {
     let item = ``;
     for (let i = 0; i < allCat.length; i++) {
         item+=`
-                <div class="col-md-3 border-0">
+                <div class="col-md-3">
                 <div class='all-item position-relative overflow-hidden rounded-3 cate' onclick='disAllCatFil("${allCat[i].strCategory}")'>
-                <img src=${allCat[i].strCategoryThumb} class='w-100'>        
+                <img src=${allCat[i].strCategoryThumb} class='w-100' loading="lazy">        
                         <div class='item-data position-absolute px-2 w-100'>
                             <h3 class='mt-3'>${allCat[i].strCategory}</h3>
                             <p>${allCat[i].strCategoryDescription}</p>
@@ -139,8 +139,8 @@ async function disAllCatFil(cate) {
             item+=`
                     <div class="col-md-3 border-0">
                         <div class='all-item position-relative overflow-hidden rounded-3'>
-                            <img src=${allCat[i].strMealThumb} class='w-100'>        
-                            <div class='item-data position-absolute px-2 end-0 w-100 text-center'>
+                            <img src=${allCat[i].strMealThumb} class='w-100' loading="lazy">        
+                            <div class='item-data position-absolute px-2 w-100 text-center'>
                                 <h3 class='mt-3'>${allCat[i].strMeal}</h3>
                             </div>
                         </div>
